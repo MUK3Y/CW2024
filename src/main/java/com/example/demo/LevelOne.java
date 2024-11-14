@@ -16,10 +16,13 @@ public class LevelOne extends LevelParent {
 	@Override
 	protected void checkIfGameOver() {
 		if (userIsDestroyed()) {
+			timeline.stop();
 			loseGame();
 		}
-		else if (userHasReachedKillTarget())
+		else if (userHasReachedKillTarget()) {
 			goToNextLevel(NEXT_LEVEL);
+			timeline.stop();
+		}
 	}
 
 	@Override

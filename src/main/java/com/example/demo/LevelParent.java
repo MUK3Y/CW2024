@@ -20,7 +20,7 @@ public abstract class LevelParent extends Observable {
 	private final double enemyMaximumYPosition;
 
 	private final Group root;
-	private final Timeline timeline;
+	protected final Timeline timeline;
 	private final UserPlane user;
 	private final Scene scene;
 	private final ImageView background;
@@ -139,7 +139,10 @@ public abstract class LevelParent extends Observable {
 
 	private void updateActors() {
 		friendlyUnits.forEach(plane -> plane.updateActor());
-		enemyUnits.forEach(enemy -> enemy.updateActor());
+		enemyUnits.forEach(enemy -> {
+			enemy.updateActor();
+			System.out.println("Updating enemy at position: " + enemy.getTranslateX() + "," + enemy.getTranslateY());
+		});
 		userProjectiles.forEach(projectile -> projectile.updateActor());
 		enemyProjectiles.forEach(projectile -> projectile.updateActor());
 	}
