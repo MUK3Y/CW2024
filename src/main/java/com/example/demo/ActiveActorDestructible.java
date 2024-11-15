@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
+
 public abstract class ActiveActorDestructible extends ActiveActor implements Destructible {
 
 	private boolean isDestroyed;
@@ -7,6 +10,19 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
 	public ActiveActorDestructible(String imageName, int imageHeight, double initialXPos, double initialYPos) {
 		super(imageName, imageHeight, initialXPos, initialYPos);
 		isDestroyed = false;
+	}
+
+	public Bounds getAdjustedBounds(){
+		Bounds originalBounds = this.getBoundsInParent();
+		double shrinkFactor = 0.3;
+
+		return new BoundingBox(
+				originalBounds.getMinX() + (originalBounds.getWidth() * (1 - shrinkFactor) /2),
+				originalBounds.getMinY() + (originalBounds.getHeight() * (1 - shrinkFactor) / 2),
+				originalBounds.getWidth() * shrinkFactor,
+				originalBounds.getHeight() * shrinkFactor
+
+		);
 	}
 
 	@Override
@@ -29,5 +45,5 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
 	public boolean isDestroyed() {
 		return isDestroyed;
 	}
-	
+
 }

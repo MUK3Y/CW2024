@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import javafx.animation.*;
 import javafx.event.EventHandler;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.*;
@@ -141,7 +143,6 @@ public abstract class LevelParent extends Observable {
 		friendlyUnits.forEach(plane -> plane.updateActor());
 		enemyUnits.forEach(enemy -> {
 			enemy.updateActor();
-			System.out.println("Updating enemy at position: " + enemy.getTranslateX() + "," + enemy.getTranslateY());
 		});
 		userProjectiles.forEach(projectile -> projectile.updateActor());
 		enemyProjectiles.forEach(projectile -> projectile.updateActor());
@@ -161,6 +162,7 @@ public abstract class LevelParent extends Observable {
 		actors.removeAll(destroyedActors);
 	}
 
+
 	private void handlePlaneCollisions() {
 		handleCollisions(friendlyUnits, enemyUnits);
 	}
@@ -177,7 +179,7 @@ public abstract class LevelParent extends Observable {
 			List<ActiveActorDestructible> actors2) {
 		for (ActiveActorDestructible actor : actors2) {
 			for (ActiveActorDestructible otherActor : actors1) {
-				if (actor.getBoundsInParent().intersects(otherActor.getBoundsInParent())) {
+				if (actor.getAdjustedBounds().intersects(otherActor.getAdjustedBounds())) {
 					actor.takeDamage();
 					otherActor.takeDamage();
 				}
