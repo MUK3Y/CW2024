@@ -12,6 +12,8 @@ public class EnemyPlane extends FighterPlane {
 
 	public EnemyPlane(double initialXPos, double initialYPos) {
 		super(IMAGE_NAME, IMAGE_HEIGHT, initialXPos, initialYPos, INITIAL_HEALTH);
+		setShrinkFactorHeight(0.25);
+		setShrinkFactorWidth(0.6);
 	}
 
 	@Override

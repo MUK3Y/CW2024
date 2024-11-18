@@ -2,27 +2,54 @@ package com.example.demo;
 
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
 
 public abstract class ActiveActorDestructible extends ActiveActor implements Destructible {
 
 	private boolean isDestroyed;
 
-	public ActiveActorDestructible(String imageName, int imageHeight, double initialXPos, double initialYPos) {
+	private double shrinkFactorWidth = 0.3;
+	private double shrinkFactorHeight = 0.3;
+
+	public ActiveActorDestructible(String imageName, int imageHeight, double initialXPos, double initialYPos, double shrinkFactorWidth, double shrinkFactorHeight) {
 		super(imageName, imageHeight, initialXPos, initialYPos);
+		this.shrinkFactorWidth = shrinkFactorWidth;
+		this.shrinkFactorHeight = shrinkFactorHeight;
 		isDestroyed = false;
+	}
+
+	public ActiveActorDestructible(String imageName, int imageHeight, double initialXPos, double initialYPos) {
+		this(imageName, imageHeight, initialXPos, initialYPos, 0.3, 0.3);
+	}
+
+	public double getShrinkFactorWidth() {
+		return shrinkFactorWidth;
+	}
+
+	public void setShrinkFactorWidth(double shrinkFactorWidth) {
+		this.shrinkFactorWidth = shrinkFactorWidth;
+	}
+
+	public double getShrinkFactorHeight() {
+		return shrinkFactorHeight;
+	}
+
+	public void setShrinkFactorHeight(double shrinkFactorHeight) {
+		this.shrinkFactorHeight = shrinkFactorHeight;
 	}
 
 	public Bounds getAdjustedBounds(){
 		Bounds originalBounds = this.getBoundsInParent();
-		double shrinkFactor = 0.3;
 
 		return new BoundingBox(
-				originalBounds.getMinX() + (originalBounds.getWidth() * (1 - shrinkFactor) /2),
-				originalBounds.getMinY() + (originalBounds.getHeight() * (1 - shrinkFactor) / 2),
-				originalBounds.getWidth() * shrinkFactor,
-				originalBounds.getHeight() * shrinkFactor
+				originalBounds.getMinX() + (originalBounds.getWidth() * (1 - shrinkFactorWidth) /2),
+				originalBounds.getMinY() + (originalBounds.getHeight() * (1 - shrinkFactorHeight) / 2),
+				originalBounds.getWidth() * shrinkFactorWidth,
+				originalBounds.getHeight() * shrinkFactorHeight
 
 		);
+
 	}
 
 	@Override

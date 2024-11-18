@@ -16,6 +16,9 @@ public class UserPlane extends FighterPlane {
 
 	public UserPlane(int initialHealth) {
 		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, initialHealth);
+		setShrinkFactorWidth(0.6);
+		setShrinkFactorHeight(0.25);
+
 		velocityMultiplier = 0;
 	}
 	
