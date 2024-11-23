@@ -4,8 +4,8 @@ public abstract class Projectile extends ActiveActorDestructible {
 
 	public Projectile(String imageName, int imageHeight, double initialXPos, double initialYPos) {
 		super(imageName, imageHeight, initialXPos, initialYPos);
-		setShrinkFactorHeight(0.1);
-		setShrinkFactorWidth(0.1);
+		setShrinkFactorWidth(0.25);
+		setShrinkFactorHeight(0.25);
 	}
 
 	@Override
