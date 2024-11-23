@@ -33,6 +33,8 @@ public class Boss extends FighterPlane {
 		framesWithShieldActivated = 0;
 		isShielded = false;
 		initializeMovePattern();
+		setShrinkFactorHeight(0.4);
+		setShrinkFactorWidth(0.7);
 	}
 
 	@Override
@@ -73,15 +75,9 @@ public class Boss extends FighterPlane {
 	}
 
 	private void updateShield() {
-		if (isShielded) {
-			framesWithShieldActivated++;
-		}
-		else if (shieldShouldBeActivated()){
-			activateShield();
-		}
-		if (shieldExhausted()) {
-			deactivateShield();
-		}
+		if (isShielded) framesWithShieldActivated++;
+		else if (shieldShouldBeActivated())activateShield();
+		if (shieldExhausted()) deactivateShield();
 	}
 
 	private int getNextMove() {
@@ -106,7 +102,7 @@ public class Boss extends FighterPlane {
 		return getLayoutY() + getTranslateY() + PROJECTILE_Y_POSITION_OFFSET;
 	}
 
-	private boolean shieldShouldBeActivated() {
+	public boolean shieldShouldBeActivated() {
 		return Math.random() < BOSS_SHIELD_PROBABILITY;
 	}
 
@@ -114,13 +110,21 @@ public class Boss extends FighterPlane {
 		return framesWithShieldActivated == MAX_FRAMES_WITH_SHIELD;
 	}
 
-	private void activateShield() {
+	public void activateShield() {
 		isShielded = true;
 	}
 
-	private void deactivateShield() {
+	public void deactivateShield() {
 		isShielded = false;
 		framesWithShieldActivated = 0;
+	}
+
+	public int getFramesWithShieldActivated(){
+		return framesWithShieldActivated;
+	}
+
+	public boolean isShielded(){
+		return isShielded;
 	}
 
 }
