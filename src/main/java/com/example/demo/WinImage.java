@@ -5,8 +5,8 @@ import javafx.scene.image.ImageView;
 
 public class WinImage extends ImageView {
 	
-	private static final String IMAGE_NAME = "/com/example/demo/images/youwin.png";
-	private static final int HEIGHT = 500;
+	private static final String IMAGE_NAME = "/com/example/demo/images/wingame.png";
+	private static final int HEIGHT = 600;
 	private static final int WIDTH = 600;
 	
 	public WinImage(double xPosition, double yPosition) {
@@ -15,7 +15,7 @@ public class WinImage extends ImageView {
 		this.setFitHeight(HEIGHT);
 		this.setFitWidth(WIDTH);
 		this.setLayoutX(xPosition);
-		this.setLayoutY(yPosition);
+		this.setLayoutY(yPosition-100);
 	}
 	
 	public void showWinImage() {

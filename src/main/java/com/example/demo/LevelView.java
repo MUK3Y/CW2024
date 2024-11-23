@@ -32,12 +32,12 @@ public class LevelView {
 		this.screenWidth = 1300;
 		this.screenHeight = 750;
 
-		Image backgroundImage = new Image(getClass().getResource("/com/example/demo/images/background1.jpg").toExternalForm());
+		Image backgroundImage = new Image(getClass().getResource("/com/example/demo/images/loseBG.jpg").toExternalForm());
 		this.backgroundImageView = new ImageView(backgroundImage);
 		backgroundImageView.setFitHeight(screenHeight);
 		backgroundImageView.setFitWidth(screenWidth);
 
-		Image backgroundImage2 = new Image(getClass().getResource("/com/example/demo/images/background2.jpg").toExternalForm());
+		Image backgroundImage2 = new Image(getClass().getResource("/com/example/demo/images/WinBG.jpg").toExternalForm());
 		this.backgroundImageView2 = new ImageView(backgroundImage2);
 		backgroundImageView2.setFitHeight(screenHeight);
 		backgroundImageView2.setFitWidth(screenWidth);
