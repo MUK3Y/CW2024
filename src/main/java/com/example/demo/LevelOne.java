@@ -33,6 +33,7 @@ public class LevelOne extends LevelParent {
 	protected void initializeFriendlyUnits() {
 		getRoot().getChildren().add(getUser());
 		initializeKillCountText();
+		initializePauseLabel();
 	}
 
 	@Override

@@ -1,12 +1,13 @@
 package com.example.demo;
 
+import java.security.Key;
 import java.util.*;
 import java.util.stream.Collectors;
-
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.animation.*;
 import javafx.event.EventHandler;
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.*;
@@ -26,6 +27,8 @@ public abstract class LevelParent extends Observable {
 	private final UserPlane user;
 	private final Scene scene;
 	private final ImageView background;
+	private boolean isPaused = false;
+	private Label pauseLabel;
 
 	private final List<ActiveActorDestructible> friendlyUnits;
 	private final List<ActiveActorDestructible> enemyUnits;
@@ -52,6 +55,7 @@ public abstract class LevelParent extends Observable {
 		this.levelView = instantiateLevelView();
 		this.currentNumberOfEnemies = 0;
 		initializeTimeline();
+
 		friendlyUnits.add(user);
 	}
 
@@ -111,6 +115,7 @@ public abstract class LevelParent extends Observable {
 				if (kc == KeyCode.UP) user.moveUp();
 				if (kc == KeyCode.DOWN) user.moveDown();
 				if (kc == KeyCode.SPACE) fireProjectile();
+				if (kc == KeyCode.P) togglePauseGame();
 			}
 		});
 		background.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -120,6 +125,28 @@ public abstract class LevelParent extends Observable {
 			}
 		});
 		root.getChildren().add(background);
+	}
+
+	protected void initializePauseLabel() {
+		pauseLabel = new Label("Game Paused");
+		pauseLabel.setFont(new Font("Arial", 30));
+		pauseLabel.setTextFill(Color.RED);
+		pauseLabel.setLayoutX(getScreenWidth() / 2 - 100);
+		pauseLabel.setLayoutY(getScreenHeight() / 2 - 50);
+		pauseLabel.setVisible(false);
+		getRoot().getChildren().add(pauseLabel);
+	}
+
+	private void togglePauseGame() {
+		if (isPaused) {
+			timeline.play();
+			pauseLabel.setVisible(false);
+			isPaused = false;
+		} else {
+			timeline.pause();
+			pauseLabel.setVisible(true);
+			isPaused = true;
+		}
 	}
 
 	private void fireProjectile() {
@@ -243,6 +270,9 @@ public abstract class LevelParent extends Observable {
 
 	protected double getScreenWidth() {
 		return screenWidth;
+	}
+	protected double getScreenHeight(){
+		return screenHeight;
 	}
 
 	protected boolean userIsDestroyed() {

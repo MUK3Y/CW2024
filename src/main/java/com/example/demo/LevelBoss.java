@@ -31,6 +31,7 @@ public class LevelBoss extends LevelParent {
 	protected void initializeFriendlyUnits() {
 		getRoot().getChildren().add(getUser());
 		getRoot().getChildren().add(bossHealthCounter);
+		initializePauseLabel();
 	}
 
 	@Override

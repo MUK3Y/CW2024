@@ -34,6 +34,7 @@ public class LevelTwo extends LevelParent {
     protected void initializeFriendlyUnits() {
         getRoot().getChildren().add(getUser());
         initializeKillCountText();
+        initializePauseLabel();
     }
 
     @Override
