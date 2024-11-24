@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import javafx.scene.text.Text;
+import javafx.scene.text.Font;
+
 public class LevelTwo extends LevelParent {
 
     private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/BG2.jpg";
@@ -8,9 +11,11 @@ public class LevelTwo extends LevelParent {
     private static final int KILLS_TO_ADVANCE = 20;
     private static final double ENEMY_SPAWN_PROBABILITY = .20;
     private static final int PLAYER_INITIAL_HEALTH = 5;
+    private Text killCountText;
 
     public LevelTwo(double screenHeight, double screenWidth) {
         super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
+
     }
 
     @Override
@@ -28,6 +33,7 @@ public class LevelTwo extends LevelParent {
     @Override
     protected void initializeFriendlyUnits() {
         getRoot().getChildren().add(getUser());
+        initializeKillCountText();
     }
 
     @Override
@@ -41,6 +47,15 @@ public class LevelTwo extends LevelParent {
             }
         }
     }
+    private void initializeKillCountText(){
+        killCountText = new Text();
+        killCountText.setFont(new Font("Impact",24));
+        killCountText.setStyle("-fx-fill: White");
+        killCountText.setLayoutX(1200);
+        killCountText.setLayoutY(40);
+        getRoot().getChildren().add(killCountText);
+    }
+
 
     @Override
     protected LevelView instantiateLevelView() {
@@ -49,6 +64,16 @@ public class LevelTwo extends LevelParent {
 
     private boolean userHasReachedKillTarget() {
         return getUser().getNumberOfKills() >= KILLS_TO_ADVANCE;
+    }
+
+    @Override
+    protected void updateScene() {
+        super.updateScene();
+        updateKillCountText();
+    }
+
+    private void updateKillCountText() {
+        killCountText.setText("Kills: " + getUser().getNumberOfKills());
     }
 
 }

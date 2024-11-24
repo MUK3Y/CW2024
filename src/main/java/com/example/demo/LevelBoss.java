@@ -22,7 +22,7 @@ public class LevelBoss extends LevelParent {
 		bossHealthCounter = new Text();
 		bossHealthCounter.setFont(new Font("Impact",24));
 		bossHealthCounter.setStyle("-fx-fill: white;");
-		bossHealthCounter.setLayoutX(1000);
+		bossHealthCounter.setLayoutX(1130);
 		bossHealthCounter.setLayoutY(40);
 		updatebossHealthCounter();
 	}
