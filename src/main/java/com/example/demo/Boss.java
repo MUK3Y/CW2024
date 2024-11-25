@@ -33,8 +33,7 @@ public class Boss extends FighterPlane {
 		framesWithShieldActivated = 0;
 		isShielded = false;
 		initializeMovePattern();
-		setShrinkFactorHeight(0.4);
-		setShrinkFactorWidth(0.7);
+
 	}
 
 	@Override
@@ -112,11 +111,15 @@ public class Boss extends FighterPlane {
 
 	public void activateShield() {
 		isShielded = true;
+		setShrinkFactorHeight(0.4);
+		setShrinkFactorWidth(0.7);
 	}
 
 	public void deactivateShield() {
 		isShielded = false;
 		framesWithShieldActivated = 0;
+		setShrinkFactorHeight(0.1);
+		setShrinkFactorWidth(0.5);
 	}
 
 	public int getFramesWithShieldActivated(){
