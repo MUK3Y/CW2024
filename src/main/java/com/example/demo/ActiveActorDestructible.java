@@ -2,8 +2,6 @@ package com.example.demo;
 
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
 
 public abstract class ActiveActorDestructible extends ActiveActor implements Destructible {
 

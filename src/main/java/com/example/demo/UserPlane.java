@@ -12,25 +12,38 @@ public class UserPlane extends FighterPlane {
 	private static final int PROJECTILE_X_POSITION = 110;
 	private static final int PROJECTILE_Y_POSITION_OFFSET = 20;
 	private double velocityMultiplier;
+	private static final double MAX_VELOCITY = 8.0; // Max vertical speed
+	private static final double ACCELERATION = 1; // Rate of speed change
+	private static final double DECELERATION = 1; // Slower stop
+
+	private double targetVelocity; // Desired velocity (set by movement keys)
+	private double currentVelocity;
 	private int numberOfKills;
 
 	public UserPlane(int initialHealth) {
 		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, initialHealth);
 		setShrinkFactorWidth(0.6);
 		setShrinkFactorHeight(0.25);
-
+		this.targetVelocity = 0;
+		this.currentVelocity = 0;
 	}
 	
 	@Override
 	public void updatePosition() {
-		if (isMoving()) {
+		if (currentVelocity < targetVelocity) {
+			currentVelocity = Math.min(currentVelocity + ACCELERATION, targetVelocity);
+		} else if (currentVelocity > targetVelocity) {
+			currentVelocity = Math.max(currentVelocity - DECELERATION, targetVelocity);
+		}
+
+
 			double initialTranslateY = getTranslateY();
-			this.moveVertically(VERTICAL_VELOCITY * velocityMultiplier);
+			this.moveVertically(currentVelocity);
 			double newPosition = getLayoutY() + getTranslateY();
 			if (newPosition < Y_UPPER_BOUND || newPosition > Y_LOWER_BOUND) {
 				this.setTranslateY(initialTranslateY);
 			}
-		}
+
 	}
 	
 	@Override
@@ -48,15 +61,15 @@ public class UserPlane extends FighterPlane {
 	}
 
 	public void moveUp() {
-		velocityMultiplier = -1.5;
+		targetVelocity = -MAX_VELOCITY;
 	}
 
 	public void moveDown() {
-		velocityMultiplier = 1.5;
+		targetVelocity = MAX_VELOCITY;
 	}
 
 	public void stop() {
-		velocityMultiplier = 0;
+		targetVelocity = 0;
 	}
 
 	public int getNumberOfKills() {
