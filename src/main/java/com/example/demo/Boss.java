@@ -12,7 +12,7 @@ public class Boss extends FighterPlane {
 	private static final double BOSS_SHIELD_PROBABILITY = .002;
 	private static final int IMAGE_HEIGHT = 300;
 	private static final int VERTICAL_VELOCITY = 8;
-	private static final int HEALTH = 1;
+	protected static int HEALTH = 50;
 	private static final int MOVE_FREQUENCY_PER_CYCLE = 5;
 	private static final int ZERO = 0;
 	private static final int MAX_FRAMES_WITH_SAME_MOVE = 10;
@@ -21,6 +21,7 @@ public class Boss extends FighterPlane {
 	private static final int MAX_FRAMES_WITH_SHIELD = 500;
 	private final List<Integer> movePattern;
 	private boolean isShielded;
+	private boolean hasShield;
 	private int consecutiveMovesInSameDirection;
 	private int indexOfCurrentMove;
 	private int framesWithShieldActivated;
@@ -32,6 +33,7 @@ public class Boss extends FighterPlane {
 		indexOfCurrentMove = 0;
 		framesWithShieldActivated = 0;
 		isShielded = false;
+		hasShield = true;
 		initializeMovePattern();
 
 	}
@@ -49,7 +51,9 @@ public class Boss extends FighterPlane {
 	@Override
 	public void updateActor() {
 		updatePosition();
-		updateShield();
+		if (hasShield) {
+			updateShield();
+		}
 	}
 
 	@Override
@@ -110,16 +114,24 @@ public class Boss extends FighterPlane {
 	}
 
 	public void activateShield() {
-		isShielded = true;
-		setShrinkFactorHeight(0.4);
-		setShrinkFactorWidth(0.7);
+		if (hasShield) {
+			isShielded = true;
+			setShrinkFactorHeight(0.4);
+			setShrinkFactorWidth(0.7);
+		}
 	}
 
 	public void deactivateShield() {
-		isShielded = false;
-		framesWithShieldActivated = 0;
-		setShrinkFactorHeight(0.1);
-		setShrinkFactorWidth(0.5);
+		if (!hasShield) {
+			isShielded = false;
+			framesWithShieldActivated = 0;
+			setShrinkFactorHeight(0.1);
+			setShrinkFactorWidth(0.5);
+		}
+	}
+
+	public void setHasShield(boolean hasShield){
+		this.hasShield = hasShield;
 	}
 
 	public int getFramesWithShieldActivated(){
@@ -129,5 +141,6 @@ public class Boss extends FighterPlane {
 	public boolean isShielded(){
 		return isShielded;
 	}
+
 
 }

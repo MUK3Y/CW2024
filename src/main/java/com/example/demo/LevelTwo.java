@@ -6,7 +6,7 @@ import javafx.scene.text.Font;
 public class LevelTwo extends LevelParent {
 
     private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/BG2.jpg";
-    private static final String NEXT_LEVEL = "com.example.demo.LevelBoss";
+    private static final String NEXT_LEVEL = "com.example.demo.LevelThree";
     private static final int TOTAL_ENEMIES = 5;
     private static final int KILLS_TO_ADVANCE = 20;
     private static final double ENEMY_SPAWN_PROBABILITY = .20;
@@ -15,7 +15,6 @@ public class LevelTwo extends LevelParent {
 
     public LevelTwo(double screenHeight, double screenWidth) {
         super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
-
     }
 
     @Override
