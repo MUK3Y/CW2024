@@ -17,8 +17,8 @@ public class LevelThree extends LevelParent {
     public LevelThree(double screenHeight, double screenWidth) {
         super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
         boss = new Boss();
-        Boss.HEALTH = 100;
-        boss.setHasShield(false);
+        Boss.HEALTH = 1;
+        boss.setShielded(false);
         bossHealthCounter = new Text();
         bossHealthCounter.setFont(new Font("Impact",24));
         bossHealthCounter.setStyle("-fx-fill: white;");
@@ -52,6 +52,7 @@ public class LevelThree extends LevelParent {
         if (getCurrentNumberOfEnemies() == 0) {
             addEnemyUnit(boss);
 
+
         }
     }
 
@@ -70,6 +71,8 @@ public class LevelThree extends LevelParent {
     protected void updateScene() {
         super.updateScene();
         updatebossHealthCounter();
+        boss.setShielded(false);
+
 
     }
 }
