@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 
 public class WinImage extends ImageView {
 	
-	private static final String IMAGE_NAME = "/com/example/demo/images/wingame.png";
+	private static final String IMAGE_NAME = "/com/example/demo/images/winBanner.png";
 	private static final int HEIGHT = 600;
 	private static final int WIDTH = 600;
 	
@@ -14,8 +14,8 @@ public class WinImage extends ImageView {
 		this.setVisible(false);
 		this.setFitHeight(HEIGHT);
 		this.setFitWidth(WIDTH);
-		this.setLayoutX(xPosition);
-		this.setLayoutY(yPosition-100);
+		this.setLayoutX(xPosition-20);
+		this.setLayoutY(yPosition-150);
 	}
 	
 	public void showWinImage() {

@@ -9,6 +9,8 @@ public class BossProjectile extends Projectile {
 
 	public BossProjectile(double initialYPos) {
 		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, initialYPos);
+		setShrinkFactorWidth(0.7);
+		setShrinkFactorHeight(0.4);
 	}
 
 	@Override
