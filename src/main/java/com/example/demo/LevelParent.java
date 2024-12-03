@@ -4,6 +4,7 @@ import java.security.Key;
 import java.util.*;
 import java.util.stream.Collectors;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Glow;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.animation.*;
@@ -139,6 +140,8 @@ public abstract class LevelParent extends Observable {
 		root.getChildren().add(background);
 	}
 
+
+
 	protected void initializePauseLabel() {
 		pauseLabel = new Label("Game Paused");
 		pauseLabel.setFont(new Font("Agency FB", 50));
@@ -146,6 +149,9 @@ public abstract class LevelParent extends Observable {
 		pauseLabel.setLayoutX(getScreenWidth() / 2 - 100);
 		pauseLabel.setLayoutY(getScreenHeight() / 2 - 50);
 		pauseLabel.setVisible(false);
+		Glow glow = new Glow();
+		glow.setLevel(0.8);
+		pauseLabel.setEffect(glow);
 		getRoot().getChildren().add(pauseLabel);
 		pauseLabel.toFront();
 	}
@@ -253,8 +259,7 @@ public abstract class LevelParent extends Observable {
 	}
 
 	private void removeDestroyedActors(List<ActiveActorDestructible> actors) {
-		List<ActiveActorDestructible> destroyedActors = actors.stream().filter(actor -> actor.isDestroyed())
-				.collect(Collectors.toList());
+		List<ActiveActorDestructible> destroyedActors = actors.stream().filter(actor -> actor.isDestroyed()).collect(Collectors.toList());
 		root.getChildren().removeAll(destroyedActors);
 		actors.removeAll(destroyedActors);
 	}

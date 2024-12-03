@@ -1,7 +1,12 @@
 package com.example.demo;
 
+import javafx.animation.FadeTransition;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
+import javafx.scene.effect.Glow;
 
 
 
@@ -33,6 +38,8 @@ public class LevelBoss extends LevelParent {
 		getRoot().getChildren().add(bossHealthCounter);
 		initializePauseLabel();
 		initializeScatterShotLabel();
+		showLevelBoss("FINAL BOSS");
+
 	}
 
 	@Override
@@ -55,6 +62,28 @@ public class LevelBoss extends LevelParent {
 			getRoot().getChildren().add(shieldImage);
 			shieldImage.showShield();
 		}
+	}
+	private void showLevelBoss(String levelName) {
+
+		Label levelLabel = new Label(levelName);
+		levelLabel.setFont(new Font("Times New ROman", 100));
+		levelLabel.setTextFill(Color.DARKGOLDENROD);
+		levelLabel.setLayoutX(getScreenWidth() / 2 - 300);
+		levelLabel.setLayoutY(getScreenHeight() / 2 - 100);
+
+
+		Glow glow = new Glow();
+		glow.setLevel(0.8);
+		levelLabel.setEffect(glow);
+
+		getRoot().getChildren().add(levelLabel);
+
+		FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), levelLabel);
+		fadeTransition.setFromValue(1.0);
+		fadeTransition.setToValue(0.0);
+		fadeTransition.setOnFinished(e -> getRoot().getChildren().remove(levelLabel)); // Remove label after fading
+
+		fadeTransition.play();
 	}
 
 	@Override

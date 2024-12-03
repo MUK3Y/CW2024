@@ -1,7 +1,12 @@
 package com.example.demo;
 
+import javafx.animation.FadeTransition;
+import javafx.scene.control.Label;
+import javafx.scene.effect.Glow;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 public class LevelTwo extends LevelParent {
 
@@ -35,6 +40,29 @@ public class LevelTwo extends LevelParent {
         initializeKillCountText();
         initializePauseLabel();
         initializeScatterShotLabel();
+        showLevelTwo("LEVEL 2");
+
+    }
+    private void showLevelTwo(String levelName) {
+
+        Label levelLabel = new Label(levelName);
+        levelLabel.setFont(new Font("Times New ROman", 100));
+        levelLabel.setTextFill(Color.WHITE);
+        levelLabel.setLayoutX(getScreenWidth() / 2 - 200);
+        levelLabel.setLayoutY(getScreenHeight() / 2 - 100);
+
+        Glow glow = new Glow();
+        glow.setLevel(0.8);
+        levelLabel.setEffect(glow);
+
+        getRoot().getChildren().add(levelLabel);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), levelLabel);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.setOnFinished(e -> getRoot().getChildren().remove(levelLabel)); // Remove label after fading
+
+        fadeTransition.play();
     }
 
     @Override
