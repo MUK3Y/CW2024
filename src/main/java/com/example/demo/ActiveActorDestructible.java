@@ -21,17 +21,11 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
 		this(imageName, imageHeight, initialXPos, initialYPos, 0.3, 0.3);
 	}
 
-	public double getShrinkFactorWidth() {
-		return shrinkFactorWidth;
-	}
 
 	public void setShrinkFactorWidth(double shrinkFactorWidth) {
 		this.shrinkFactorWidth = shrinkFactorWidth;
 	}
 
-	public double getShrinkFactorHeight() {
-		return shrinkFactorHeight;
-	}
 
 	public void setShrinkFactorHeight(double shrinkFactorHeight) {
 		this.shrinkFactorHeight = shrinkFactorHeight;

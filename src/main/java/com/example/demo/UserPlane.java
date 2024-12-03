@@ -11,10 +11,8 @@ public class UserPlane extends FighterPlane {
 	private static final double INITIAL_X_POSITION = 5.0;
 	private static final double INITIAL_Y_POSITION = 300.0;
 	private static final int IMAGE_HEIGHT = 150;
-	private static final int VERTICAL_VELOCITY = 8;
 	private static final int PROJECTILE_X_POSITION = 110;
 	private static final int PROJECTILE_Y_POSITION_OFFSET = 20;
-	private double velocityMultiplier;
 	private static final double MAX_VELOCITY = 8.0; // Max vertical speed
 	private static final double ACCELERATION = 1; // Rate of speed change
 	private static final double DECELERATION = 1; // Slower stop
@@ -65,21 +63,19 @@ public class UserPlane extends FighterPlane {
 	}
 	public List<ActiveActorDestructible> fireScatterShot() {
 		if (!canFireScatterShot()) {
-			return new ArrayList<>(); // Return empty list if no uses left
+			return new ArrayList<>();
 		}
 
 		useScatterShot();
 		List<ActiveActorDestructible> projectiles = new ArrayList<>();
 
-		// Starting X and Y positions for the scatter shot
 		double xPos = PROJECTILE_X_POSITION;
 		double yPos = getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET);
 
-		// Create three projectiles with different angles
-		projectiles.add(new UserProjectile(xPos, yPos, 0));    // Straight
-		projectiles.add(new UserProjectile(xPos, yPos, -5)); // Diagonal left
-		projectiles.add(new UserProjectile(xPos, yPos, 5));  // Diagonal right
 
+		projectiles.add(new UserProjectile(xPos, yPos, 0));
+		projectiles.add(new UserProjectile(xPos, yPos, -5));
+		projectiles.add(new UserProjectile(xPos, yPos, 5));
 		return projectiles;
 	}
 
@@ -94,9 +90,6 @@ public class UserPlane extends FighterPlane {
 		return new UserProjectile(PROJECTILE_X_POSITION, getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET),0);
 	}
 
-	private boolean isMoving() {
-		return velocityMultiplier != 0;
-	}
 
 	public void moveUp() {
 		targetVelocity = -MAX_VELOCITY;
