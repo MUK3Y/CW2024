@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserPlane extends FighterPlane {
 
 	private static final String IMAGE_NAME = "userplane.png";
@@ -19,6 +22,8 @@ public class UserPlane extends FighterPlane {
 	private double targetVelocity; // Desired velocity (set by movement keys)
 	private double currentVelocity;
 	private int numberOfKills;
+	private int scatterShotUses = 5;
+
 
 	public UserPlane(int initialHealth) {
 		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, initialHealth);
@@ -45,7 +50,40 @@ public class UserPlane extends FighterPlane {
 			}
 
 	}
-	
+	public int getScatterShotUses() {
+		return scatterShotUses;
+	}
+
+	public boolean canFireScatterShot() {
+		return scatterShotUses > 0;
+	}
+
+	public void useScatterShot() {
+		if (canFireScatterShot()) {
+			scatterShotUses--;
+		}
+	}
+	public List<ActiveActorDestructible> fireScatterShot() {
+		if (!canFireScatterShot()) {
+			return new ArrayList<>(); // Return empty list if no uses left
+		}
+
+		useScatterShot();
+		List<ActiveActorDestructible> projectiles = new ArrayList<>();
+
+		// Starting X and Y positions for the scatter shot
+		double xPos = PROJECTILE_X_POSITION;
+		double yPos = getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET);
+
+		// Create three projectiles with different angles
+		projectiles.add(new UserProjectile(xPos, yPos, 0));    // Straight
+		projectiles.add(new UserProjectile(xPos, yPos, -5)); // Diagonal left
+		projectiles.add(new UserProjectile(xPos, yPos, 5));  // Diagonal right
+
+		return projectiles;
+	}
+
+
 	@Override
 	public void updateActor() {
 		updatePosition();
@@ -53,7 +91,7 @@ public class UserPlane extends FighterPlane {
 	
 	@Override
 	public ActiveActorDestructible fireProjectile() {
-		return new UserProjectile(PROJECTILE_X_POSITION, getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET));
+		return new UserProjectile(PROJECTILE_X_POSITION, getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET),0);
 	}
 
 	private boolean isMoving() {

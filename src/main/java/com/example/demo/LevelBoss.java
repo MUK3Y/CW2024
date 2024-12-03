@@ -32,6 +32,7 @@ public class LevelBoss extends LevelParent {
 		getRoot().getChildren().add(getUser());
 		getRoot().getChildren().add(bossHealthCounter);
 		initializePauseLabel();
+		initializeScatterShotLabel();
 	}
 
 	@Override

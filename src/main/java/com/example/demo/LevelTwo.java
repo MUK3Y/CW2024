@@ -34,6 +34,7 @@ public class LevelTwo extends LevelParent {
         getRoot().getChildren().add(getUser());
         initializeKillCountText();
         initializePauseLabel();
+        initializeScatterShotLabel();
     }
 
     @Override

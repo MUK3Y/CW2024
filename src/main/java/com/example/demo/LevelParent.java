@@ -35,6 +35,9 @@ public abstract class LevelParent extends Observable {
 	private boolean isPaused = false;
 	private Label pauseLabel;
 	protected static Clip backgroundMusicClip;
+	private Label scatterShotLabel;
+	protected static Clip clip;
+
 
 
 
@@ -123,6 +126,7 @@ public abstract class LevelParent extends Observable {
 				if (kc == KeyCode.UP) user.moveUp();
 				if (kc == KeyCode.DOWN) user.moveDown();
 				if (kc == KeyCode.SPACE) fireProjectile();
+				if (kc == KeyCode.X) fireScatterShot();
 				if (kc == KeyCode.P) togglePauseGame();
 			}
 		});
@@ -138,12 +142,23 @@ public abstract class LevelParent extends Observable {
 	protected void initializePauseLabel() {
 		pauseLabel = new Label("Game Paused");
 		pauseLabel.setFont(new Font("Agency FB", 50));
-		pauseLabel.setTextFill(Color.WHITE);
+		pauseLabel.setTextFill(Color.RED);
 		pauseLabel.setLayoutX(getScreenWidth() / 2 - 100);
 		pauseLabel.setLayoutY(getScreenHeight() / 2 - 50);
 		pauseLabel.setVisible(false);
 		getRoot().getChildren().add(pauseLabel);
+		pauseLabel.toFront();
 	}
+	protected void initializeScatterShotLabel() {
+		scatterShotLabel = new Label("Scatter Shots: " + getUser().getScatterShotUses());
+		scatterShotLabel.setFont(new Font("Impact", 24));
+		scatterShotLabel.setTextFill(Color.WHITE);
+		scatterShotLabel.setLayoutX(1111); // Position on screen
+		scatterShotLabel.setLayoutY(50);
+		root.getChildren().add(scatterShotLabel);
+		scatterShotLabel.toFront();
+	}
+
 
 	private void togglePauseGame() {
 		if (isPaused) {
@@ -169,7 +184,7 @@ public abstract class LevelParent extends Observable {
 		public void playSound(String soundFile) {
 			try {
 				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(soundFile));
-				Clip clip = AudioSystem.getClip();
+				clip  = AudioSystem.getClip();
 				clip.open(audioInputStream);
 				clip.start();
 			} catch (Exception e) {
@@ -195,6 +210,20 @@ public abstract class LevelParent extends Observable {
 		userProjectiles.add(projectile);
 		playSound("/Music/pew.wav");
 	}
+	private void fireScatterShot() {
+
+		List<ActiveActorDestructible> projectiles = user.fireScatterShot();
+
+		for (ActiveActorDestructible projectile : projectiles) {
+			root.getChildren().add(projectile);
+			userProjectiles.add(projectile);
+		}
+			playSound("/Music/pew.wav");
+		if (user.getScatterShotUses() == 0) {
+			clip.stop();
+		}
+	}
+
 
 	private void generateEnemyFire() {
 		enemyUnits.forEach(enemy -> spawnEnemyProjectile(((FighterPlane) enemy).fireProjectile()));
@@ -266,6 +295,7 @@ public abstract class LevelParent extends Observable {
 
 	private void updateLevelView() {
 		levelView.removeHearts(user.getHealth());
+		scatterShotLabel.setText("Scatter Shots: " + getUser().getScatterShotUses());
 	}
 
 	private void updateKillCount() {
