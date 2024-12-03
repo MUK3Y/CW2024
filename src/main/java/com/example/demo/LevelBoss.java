@@ -41,6 +41,9 @@ public class LevelBoss extends LevelParent {
 		}
 		else if (boss.isDestroyed()) {
 			winGame();
+
+			backgroundMusicClip.stop();
+			playSound("/Music/Win.wav");
 		}
 	}
 

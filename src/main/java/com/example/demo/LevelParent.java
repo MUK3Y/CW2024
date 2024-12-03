@@ -13,6 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.util.Duration;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
+
 
 public abstract class LevelParent extends Observable {
 
@@ -29,6 +34,9 @@ public abstract class LevelParent extends Observable {
 	private final ImageView background;
 	private boolean isPaused = false;
 	private Label pauseLabel;
+	protected static Clip backgroundMusicClip;
+
+
 
 	private final List<ActiveActorDestructible> friendlyUnits;
 	private final List<ActiveActorDestructible> enemyUnits;
@@ -129,8 +137,8 @@ public abstract class LevelParent extends Observable {
 
 	protected void initializePauseLabel() {
 		pauseLabel = new Label("Game Paused");
-		pauseLabel.setFont(new Font("Arial", 30));
-		pauseLabel.setTextFill(Color.RED);
+		pauseLabel.setFont(new Font("Agency FB", 50));
+		pauseLabel.setTextFill(Color.WHITE);
 		pauseLabel.setLayoutX(getScreenWidth() / 2 - 100);
 		pauseLabel.setLayoutY(getScreenHeight() / 2 - 50);
 		pauseLabel.setVisible(false);
@@ -142,17 +150,50 @@ public abstract class LevelParent extends Observable {
 			timeline.play();
 			pauseLabel.setVisible(false);
 			isPaused = false;
+			if (backgroundMusicClip != null && !backgroundMusicClip.isRunning()) {
+				backgroundMusicClip.start(); // Resume the music
+			}
+			isPaused = false;
 		} else {
 			timeline.pause();
 			pauseLabel.setVisible(true);
 			isPaused = true;
+			if (backgroundMusicClip != null && backgroundMusicClip.isRunning()) {
+				backgroundMusicClip.stop(); // Pause the music
+			}
+			isPaused = true;
 		}
 	}
+
+
+		public void playSound(String soundFile) {
+			try {
+				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(soundFile));
+				Clip clip = AudioSystem.getClip();
+				clip.open(audioInputStream);
+				clip.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	public static void BGplaySound(String soundFile) {
+		try {
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(LevelParent.class.getResource(soundFile));
+			backgroundMusicClip = AudioSystem.getClip();
+			backgroundMusicClip.open(audioInputStream);
+			backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY); // Loop the background music
+			backgroundMusicClip.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	private void fireProjectile() {
 		ActiveActorDestructible projectile = user.fireProjectile();
 		root.getChildren().add(projectile);
 		userProjectiles.add(projectile);
+		playSound("/Music/pew.wav");
 	}
 
 	private void generateEnemyFire() {
@@ -240,11 +281,15 @@ public abstract class LevelParent extends Observable {
 	protected void winGame() {
 		timeline.stop();
 		levelView.showWinImage();
+
 	}
 
 	protected void loseGame() {
 		timeline.stop();
 		levelView.showGameOverImage();
+		backgroundMusicClip.stop();
+		playSound("/Music/Lose.wav");
+
 	}
 
 	protected UserPlane getUser() {
