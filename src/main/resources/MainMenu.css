@@ -1,0 +1,6 @@
+.root{
+    -fx-background-image: url(com/example/demo/images/Menu.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
