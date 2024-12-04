@@ -1,8 +1,12 @@
-package com.example.demo;
+package com.example.demo.Levels;
 
-import java.security.Key;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import com.example.demo.ActiveActor.ActiveActorDestructible;
+import com.example.demo.ActiveActor.FighterPlane;
+import com.example.demo.Displays.LevelView;
+import com.example.demo.ActiveActor.UserPlane;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.paint.Color;

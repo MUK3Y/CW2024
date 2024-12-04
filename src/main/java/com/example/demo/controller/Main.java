@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.LevelParent;
+import com.example.demo.Levels.LevelParent;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +24,7 @@ public class Main extends Application {
 		stage.setWidth(SCREEN_WIDTH);
 		LevelParent.BGplaySound("/Music/BGM.wav");
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/images/MainMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainMenu/MainMenu.fxml"));
 		Parent root = loader.load();
 		Scene mainMenuScene = new Scene(root);
 		stage.setScene(mainMenuScene);

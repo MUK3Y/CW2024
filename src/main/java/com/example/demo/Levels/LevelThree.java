@@ -1,5 +1,8 @@
-package com.example.demo;
+package com.example.demo.Levels;
 
+import com.example.demo.ActiveActor.Boss;
+import com.example.demo.Displays.LevelView;
+import com.example.demo.Displays.LevelViewLevelTwo;
 import javafx.animation.FadeTransition;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
@@ -14,7 +17,7 @@ public class LevelThree extends LevelParent {
     private static final String BACKGROUND_IMAGE_NAME = "/com/example/demo/images/BG3.jpg";
     private static final int PLAYER_INITIAL_HEALTH = 5;
     private final Boss boss;
-    private static final String NEXT_LEVEL = "com.example.demo.LevelBoss";
+    private static final String NEXT_LEVEL = "com.example.demo.Levels.LevelBoss";
     private LevelViewLevelTwo levelView;
     private Text bossHealthCounter;
 

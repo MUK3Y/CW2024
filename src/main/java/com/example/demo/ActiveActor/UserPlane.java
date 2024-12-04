@@ -1,4 +1,6 @@
-package com.example.demo;
+package com.example.demo.ActiveActor;
+
+import com.example.demo.Projectiles.UserProjectile;
 
 import java.util.ArrayList;
 import java.util.List;

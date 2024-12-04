@@ -1,5 +1,9 @@
-package com.example.demo;
+package com.example.demo.Levels;
 
+import com.example.demo.ActiveActor.Boss;
+import com.example.demo.Displays.LevelView;
+import com.example.demo.Displays.LevelViewLevelTwo;
+import com.example.demo.Displays.ShieldImage;
 import javafx.animation.FadeTransition;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;

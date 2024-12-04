@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.ActiveActor;
 
+import com.example.demo.Destructible;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 
