@@ -43,7 +43,13 @@ public abstract class LevelParent extends Observable {
 	private Label scatterShotLabel;
 	protected static Clip clip;
 
-
+	private final List<ActiveActorDestructible> friendlyUnits; // List of friendly actors
+	private final List<ActiveActorDestructible> enemyUnits; // List of enemy actors
+	private final List<ActiveActorDestructible> userProjectiles; // List of projectiles fired by the user
+	private final List<ActiveActorDestructible> enemyProjectiles; // List of projectiles fired by enemies
+	private int currentNumberOfEnemies; // Current number of active enemies
+	private LevelView levelView; // The visual representation of the level
+	private boolean isGameActive = true;
 
 
 	private final List<ActiveActorDestructible> friendlyUnits;
@@ -213,13 +219,14 @@ public abstract class LevelParent extends Observable {
 
 
 	private void fireProjectile() {
+		if (!isGameActive) return;
 		ActiveActorDestructible projectile = user.fireProjectile();
 		root.getChildren().add(projectile);
 		userProjectiles.add(projectile);
 		playSound("/Music/pew.wav");
 	}
 	private void fireScatterShot() {
-
+		if (!isGameActive) return;
 		List<ActiveActorDestructible> projectiles = user.fireScatterShot();
 
 		for (ActiveActorDestructible projectile : projectiles) {
@@ -234,6 +241,7 @@ public abstract class LevelParent extends Observable {
 
 
 	private void generateEnemyFire() {
+		if (!isGameActive) return;
 		enemyUnits.forEach(enemy -> spawnEnemyProjectile(((FighterPlane) enemy).fireProjectile()));
 	}
 
