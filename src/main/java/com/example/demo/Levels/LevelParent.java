@@ -157,7 +157,6 @@ public abstract class LevelParent extends Observable {
 		glow.setLevel(0.8);
 		pauseLabel.setEffect(glow);
 		getRoot().getChildren().add(pauseLabel);
-		pauseLabel.toFront();
 	}
 	protected void initializeScatterShotLabel() {
 		scatterShotLabel = new Label("Scatter Shots: " + getUser().getScatterShotUses());
@@ -166,7 +165,6 @@ public abstract class LevelParent extends Observable {
 		scatterShotLabel.setLayoutX(1111); // Position on screen
 		scatterShotLabel.setLayoutY(50);
 		root.getChildren().add(scatterShotLabel);
-		scatterShotLabel.toFront();
 	}
 
 
