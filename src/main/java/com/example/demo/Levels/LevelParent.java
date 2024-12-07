@@ -220,6 +220,7 @@ public abstract class LevelParent extends Observable {
 
 	private void fireProjectile() {
 		if (!isGameActive) return;
+		if(isPaused) return;
 		ActiveActorDestructible projectile = user.fireProjectile();
 		root.getChildren().add(projectile);
 		userProjectiles.add(projectile);
@@ -227,6 +228,7 @@ public abstract class LevelParent extends Observable {
 	}
 	private void fireScatterShot() {
 		if (!isGameActive) return;
+		if (isPaused) return;
 		List<ActiveActorDestructible> projectiles = user.fireScatterShot();
 
 		for (ActiveActorDestructible projectile : projectiles) {
@@ -324,12 +326,14 @@ public abstract class LevelParent extends Observable {
 	}
 
 	protected void winGame() {
+		isGameActive = false;
 		timeline.stop();
 		levelView.showWinImage();
 
 	}
 
 	protected void loseGame() {
+		isGameActive = false;
 		timeline.stop();
 		levelView.showGameOverImage();
 		backgroundMusicClip.stop();
