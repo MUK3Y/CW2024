@@ -6,13 +6,43 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" stylesheets="/MainMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.SceneController">
+<!--
+FXML layout file for the Main Menu scene of the Sky Battle game.
+
+This file defines the structure of the user interface for the main menu,
+including the title and buttons to start or quit the game. It also applies styles
+from an external CSS file.
+
+-->
+
+<AnchorPane
+        maxHeight="-Infinity"
+        maxWidth="-Infinity"
+        minHeight="-Infinity"
+        minWidth="-Infinity"
+        prefHeight="750.0"
+        prefWidth="1300.0"
+        stylesheets="/MainMenu.css"
+        xmlns="http://javafx.com/javafx/23.0.1"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.demo.controller.SceneController">
+
    <children>
+
+      <!--
+      The label at the top of the screen displaying the game title, "SKY BATTLE".
+      The text is white, with a large font size of 120.
+      -->
       <Label layoutX="430.0" layoutY="28.0" text="SKY BATTLE" textFill="WHITE">
          <font>
             <Font name="Bodoni MT Condensed" size="120.0" />
          </font>
       </Label>
+
+      <!--
+      The "PLAY" button located towards the bottom of the screen.
+      The button has a transparent background and white text, with a large font size of 64.
+      -->
       <Button fx:id="startGameButton" layoutX="992.0" layoutY="442.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="PLAY" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="64.0" />
@@ -21,10 +51,16 @@
             <Insets />
          </opaqueInsets>
       </Button>
+
+      <!--
+      The "QUIT" button positioned just below the "PLAY" button.
+      It has a transparent background with white text, and also uses a large font size of 64.
+      -->
       <Button fx:id="quitButton" layoutX="977.0" layoutY="564.0" mnemonicParsing="false" prefHeight="127.0" prefWidth="275.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="QUIT" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="64.0" />
          </font>
       </Button>
+
    </children>
 </AnchorPane>

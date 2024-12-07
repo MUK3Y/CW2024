@@ -1,6 +1,32 @@
-.root{
+/* 
+Root class CSS for the main menu background of the Sky Battle game.
+
+This CSS rule applies styles to the root element of the main menu scene, setting 
+a background image and ensuring it is displayed correctly.
+
+*/
+
+.root {
+    /* 
+    The background image for the main menu scene is set using a relative path.
+    The image will be displayed as the full background.
+    */
     -fx-background-image: url(com/example/demo/images/Menu.jpg);
+    
+    /* 
+    The background image will not repeat, meaning it will only be displayed once.
+    */
     -fx-background-repeat: no-repeat;
+    
+    /* 
+    The background image is scaled to cover the entire background area of the scene, 
+    while maintaining its aspect ratio.
+    */
     -fx-background-size: cover;
+    
+    /* 
+    The background image is centered within the root element, ensuring it is aligned 
+    in the center of the screen.
+    */
     -fx-background-position: center;
 }
