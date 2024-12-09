@@ -154,7 +154,26 @@
 
   **7. Modified Java Classes**
 
+    7.1. Main Class  
+        7.1.1. Added Background Music  
+               - Change: Added a call to `LevelParent.BGplaySound("/Music/BGM.wav")` to play background music when the game launches.  
+               - Reason: To enhance the user experience by providing immersive audio as part of the game's main menu.  
 
+        7.1.2. Integrated Main Menu Scene  
+              - Change: Replaced direct controller initialization with the loading of an FXML file for the main menu. 
+              - Reason: To implement a modular and scalable user interface using JavaFX FXML, making it easier to manage and update the main menu layout and functionality.  
+
+        7.1.3. Linked Scene Controller  
+               - Change: Configured the `SceneController` by passing the primary `Stage` to it using  
+               - Reason: To manage transitions between different scenes (e.g., main menu, gameplay) and improve code modularity and reusability.  
+
+        7.1.4. Removed Direct `Controller` Initialization  
+               - Change: Removed the initialization of `Controller` (`myController = new Controller(stage);`) and its associated method `launchGame()`.  
+               - Reason: Transitioned to a more structured design pattern by starting the game via the main menu and scene transitions rather than directly launching the                             game logic.  
+
+        7.1.5. Enhanced Documentation  
+               - Change: Added detailed Javadoc comments for the class and methods.  
+               - Reason: To improve code readability, maintainability, and provide clear explanations of the purpose and functionality of each component.  
 
 
 
