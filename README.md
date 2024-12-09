@@ -160,13 +160,7 @@
 
   **8. Unexpected problems**
 
-      8.1. Shield hitbox issue
-        8.1.1. The shield worked when I was able to activate however, the bullets still went through the shield. Then realised it was because of 
-                shrinkfactor I used to reduce the BossPlane's boundingbox which was perfect to the plane, however the shield was bigger in height.
-                To fix that added an if-else to if shield present shrinkfactor is bigger. This problem ws unexpected beacuse other I knew didn't
-                necessarily have this issue.
-
-      8.2. Time given
-        8.2.1. Time given to understand and then refactor the game and implement wasn't enough, struggled doing so however classmates came together 
+      8.1. Time given
+        8.1.1. Time given to understand and then refactor the game and implement wasn't enough, struggled doing so however classmates came together 
                 to ask for extension time.
                             
