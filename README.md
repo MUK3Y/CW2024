@@ -226,37 +226,156 @@
                - Reason: To align the class with the appropriate package for better project organization and consistency.   
 
     7.7. UserPlane  
-        7.7.1 Enhanced Velocity Management  
+        7.7.1. Enhanced Velocity Management  
                - Change: Replaced the integer `velocityMultiplier` with a `double` for more precise velocity control, including `currentVelocity` and `targetVelocity`.  
                - Reason: To allow smoother and more gradual movement of the plane with acceleration and deceleration, improving the responsiveness of user controls.  
         
-        7.7.2 Introduced Acceleration and Deceleration  
+        7.7.2. Introduced Acceleration and Deceleration  
                - Change: Added new constants `ACCELERATION` and `DECELERATION`, and logic for adjusting the velocity gradually.  
                - Reason: To provide more fluid movement, making the game feel more dynamic and responsive rather than just snapping between states.  
         
-        7.7.3 Scatter Shot Mechanic Added  
+        7.7.3. Scatter Shot Mechanic Added  
                - Change: Introduced a new method `fireScatterShot()` that fires multiple projectiles in different directions.  
                - Reason: To offer the player more attack options, enhancing gameplay variety. The feature is limited by the number of available scatter shots.  
         
-        7.7.4 Improved Movement Control  
+        7.7.4. Improved Movement Control  
                - Change: The movement logic was modified to use `targetVelocity` and `currentVelocity` to control vertical movement instead of direct setting of `velocityMultiplier`.  
                - Reason: This allows for smoother transitions in movement, avoiding abrupt stops and starts, making the controls feel more natural.  
         
-        7.7.5 Health Management Enhancements  
+        7.7.5. Health Management Enhancements  
                - Change: Introduced `setShrinkFactorWidth(0.6)` and `setShrinkFactorHeight(0.25)` to modify the size of the plane, likely reflecting a damage state or aesthetic choice.  
                - Reason: To visually indicate the player's plane condition and provide a more immersive experience.  
         
-        7.7.6 Scatter Shot Use Limitation  
+        7.7.6. Scatter Shot Use Limitation  
                - Change: Added a `scatterShotUses` counter to limit the number of times scatter shots can be used.  
                - Reason: To add a layer of strategy to the gameplay, forcing the player to use scatter shots wisely.  
         
-        7.7.7 Simplified Projectile Firing  
+        7.7.7. Simplified Projectile Firing  
                - Change: The `fireProjectile()` method was retained, but it now includes clearer logic for firing projectiles directly ahead of the plane.  
                - Reason: To maintain consistency in firing logic while enabling new attack mechanics like scatter shots.  
         
-        7.7.8 Kill Tracking  
+        7.7.8. Kill Tracking  
                - Change: Introduced `incrementKillCount()` and `getNumberOfKills()` to track and display the player's kill count.  
                - Reason: To enhance the game's competitive aspect and give the player more engagement with progress and achievements.
+    7.8. GameOverImage  
+        7.8.1. Refactoring Package Structure  
+               - Change: Moved the class to `com.example.demo.Displays` package for consistency with the project structure.  
+               - Reason: To align the class with the appropriate package for better project organization and consistency.   
+
+    7.9. LevelView  
+        7.9.1. Refactored Package Structure  
+               - Change: Moved the class from `com.example.demo` to `com.example.demo.Displays`.  
+               - Reason: Organized the package structure to group display-related components, improving maintainability and clarity.  
+        
+        7.9.2. Introduced Background Images  
+               - Change: Added two `ImageView` objects, `backgroundImageView` and `backgroundImageView2`, to represent the "Game Over" and "Win" background images.  
+               - Reason: Improved visual feedback by displaying themed backgrounds for game-ending states, enhancing user experience.  
+            
+        7.9.3. Enhanced Win Screen  
+               - Change: Updated `showWinImage()` to include the win background image along with the win graphic.  
+               - Reason: Created a more visually appealing and polished win screen.  
+        
+        7.9.4. Enhanced Game Over Screen  
+               - Change: Modified `showGameOverImage()` to include the lose background image and scaled the game over graphic for better alignment.  
+               - Reason: Enhanced the game over screen’s visual consistency and usability.  
+        
+        7.9.5. Added Screen Dimensions  
+               - Change: Introduced `screenWidth` and `screenHeight` variables to manage consistent scaling of backgrounds and other elements.  
+               - Reason: Improved flexibility for adapting the UI to various screen sizes and resolutions.  
+   
+    7.10. HeartDisplay 
+         7.10.1. Refactoring Package Structure  
+                 - Change: Moved the class to `com.example.demo.Displays` package for consistency with the project structure.  
+                 - Reason: To align the class with the appropriate package for better project organization and consistency. 
+    
+    7.11. LevelViewLevelTwo  
+         7.11.1. Refactored Package Structure  
+               - Change: Moved the class from `com.example.demo` to `com.example.demo.Displays`.  
+               - Reason: Organized display-related components in a dedicated package to improve project structure and maintainability.  
+            
+         7.11.2. Enhanced Constructor  
+               - Change: Updated the constructor to explicitly initialize the shield image and add it to the root group.  
+               - Reason: Improved clarity and ensured proper initialization of all elements specific to this level.  
+
+    7.12. ShieldImage  
+        7.12.1. Refactored Package Structure  
+               - **Change:** Moved the class from `com.example.demo` to `com.example.demo.Displays`.  
+               - **Reason:** Organized display-related components in a dedicated package for better structure and maintainability.  
+            
+         7.12.3. Fixed Image Path  
+               - **Change:** Updated the image resource path to use `"/com/example/demo/images/shield.png"` instead of the incorrect one.  
+               - **Reason:** Corrected the image resource path for the shield image to ensure it loads the correct image file.  
+
+    7.13. WinImage  
+        7.13.1. Refactored Package Structure  
+               - Change: Moved the class from `com.example.demo` to `com.example.demo.Displays`.  
+               - Reason: Improved the organization of display-related components for better maintainability and clarity in project structure.  
+            
+        7.13.2. Updated Image Path  
+               - Change: Changed the image to `"/com/example/demo/images/winBanner.png"` instead of the old one.  
+               - Reason: Replaced the old youwin image to ensure a better display when won.  
+            
+        7.13.3. Adjusted Image Placement  
+               - Change: Modified the `setLayoutX()` and `setLayoutY()` methods to adjust the position of the win image (`xPosition - 20` and `yPosition - 150`).  
+               - Reason: Refined the position of the "win" image to provide a more visually pleasing placement on the screen.  
+            
+        7.13.4. Increased Image Size  
+               - Change: Refactored the height of the "win" banner to 600 pixels while keeping the width at 600 pixels.  
+               - Reason: Ensured the "win" banner has a larger, more prominent appearance in the game's UI for better visibility.  
+
+    7.14. LevelBoss  
+        7.14.1. Added Shield Functionality for Boss  
+               - Change: Introduced ShieldImage to visually represent the boss's shield and manage its activation and deactivation in the updateScene method.  
+               - Reason: Enhanced gameplay by adding a defensive mechanic for the boss, making the final level more challenging and dynamic.  
+
+        7.14.2. Displayed Boss Health Counter  
+               - Change: Added a Text element bossHealthCounter to show the boss's health dynamically. Implemented the updatebossHealthCounter method to keep it updated.  
+               - Reason: Improved user experience by providing real-time feedback on the boss's remaining health.  
+
+        7.14.3. Introduced Level Name Display with Effects  
+               - Change: Added the showLevelBoss method to display the level name with a glowing text effect and fade-out animation.  
+               - Reason: Created a dramatic and immersive introduction to the final boss level, enhancing player engagement.  
+
+        7.14.4. Improved Game-Over Logic with Sound Effects  
+               - Change: Played a victory sound effect when the boss is defeated and stopped the background music at game end.  
+               - Reason: Enhanced the emotional impact of both victory and defeat scenarios.  
+
+        7.14.5. Adjusted Enemy Spawning to Include Shield Visuals  
+               - Change: Updated spawnEnemyUnits to add the shield image alongside the boss when enemies are spawned.  
+               - Reason: Ensured proper initialization and visibility of the boss's shield during gameplay.  
+
+        7.14.6. Refactored UI Initialization  
+               - Change: Consolidated the setup of UI elements such as the boss health counter, shield image, and labels into separate methods.  
+               - Reason: Improved code readability and modularity for better maintainability.  
+
+        7.14.7. Renamed Class and Enhanced Documentation  
+               - Change: Renamed the class from LevelTwo to LevelBoss.  
+               - Reason: Provided better specificity and clarity for the class's role and functionality within the project.
+
+    7.15. LevelOne  
+        7.15.1. Enhanced Kill Count Display  
+               - Change: Introduced a killCountText object to show the player’s current kills dynamically. Implemented initializeKillCountText and updateKillCountText methods to manage its initialization and updates.  
+               - Reason: Provided real-time feedback to players on their progress towards the next level.  
+
+        7.15.2. Added Level Name Display  
+               - Change: Implemented the showLevelOne method to display the level name with glowing text and a fade-out animation.  
+               - Reason: Enhanced player immersion and provided a clear introduction to Level One.  
+
+        7.15.3. Refined Game-Over Logic  
+               - Change: Stopped the timeline in checkIfGameOver when the player is destroyed or reaches the kill target.  
+               - Reason: Prevented additional events from occurring after the game ends or transitions to the next level.  
+
+        7.15.4. Improved UI Initialization  
+               - Change: Consolidated the setup of UI components like the kill count display, level name, and labels into initializeFriendlyUnits.  
+               - Reason: Streamlined the initialization process for better maintainability and readability.  
+
+        7.15.5. Adjusted Background and Next Level Paths  
+               - Change: Changed BACKGROUND_IMAGE_NAME to "/com/example/demo/images/BG1.jpg" and NEXT_LEVEL to "com.example.demo.Levels.LevelTwo".  
+               - Reason: Ensured accurate references to resources and transitions and added a nicer background.  
+
+        7.15.6. Improved Code Readability and Documentation  
+               - Change: Added detailed comments and method-level documentation throughout the class.  
+               - Reason: Enhanced clarity and understanding of the code's functionality for future developers.  
 
     
 
