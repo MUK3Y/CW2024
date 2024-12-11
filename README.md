@@ -171,9 +171,94 @@
                - Change: Removed the initialization of `Controller` (`myController = new Controller(stage);`) and its associated method `launchGame()`.  
                - Reason: Transitioned to a more structured design pattern by starting the game via the main menu and scene transitions rather than directly launching the                             game logic.  
 
-        7.1.5. Enhanced Documentation  
-               - Change: Added detailed Javadoc comments for the class and methods.  
-               - Reason: To improve code readability, maintainability, and provide clear explanations of the purpose and functionality of each component.  
+    7.2. ActiveActor  
+        7.2.1. Package Organization Updated  
+               - Change: Moved the class to the `com.example.demo.ActiveActor` package.  
+               - Reason: To improve code organization and clarity by categorizing classes into specific packages based on functionality.  
+
+    7.3. ActiveActorDestructible  
+        7.3.1. Added Collision Bounds Adjustment  
+               - Change: Introduced the `getAdjustedBounds()` method to calculate collision bounds based on configurable shrink factors.  
+               - Reason: To allow precise control over collision detection by adjusting the effective collision area of the actor.  
+        
+        7.3.2. Added Configurable Shrink Factors  
+               - Change: Added `shrinkFactorWidth` and `shrinkFactorHeight` as properties to control collision bounds' width and height adjustments.  
+               - Reason: To provide flexibility in defining the actor's collision area, improving collision accuracy for differently sized actors.  
+        
+        7.3.3. Overloaded Constructor with Default Shrink Factors  
+               - Change: Created a new constructor with default shrink factors (`0.3` for both width and height).  
+               - Reason: To simplify object creation when specific shrink factors are not provided, improving ease of use.  
+
+    7.4. Boss Class
+        7.4.1 Adjustments to Health and Shield Properties  
+                - Change: Reduced HEALTH from 100 to 50 for level three.  
+                - Reason: Balancing gameplay to make the boss less overpowered and more engaging.  
+        
+        7.4.2 Improved Shielding Mechanics  
+                - Change: Refactored activateShield and deactivateShield methods to adjust collision bounds dynamically using setShrinkFactorHeight and setShrinkFactorWidth.  
+                - Reason: Enhanced visual feedback and functionality by shrinking the collision area during shielding to reflect a defensive state.  
+        
+        7.4.3 Customizable Shield Activation  
+                - Change: Made shieldShouldBeActivated a public method to allow more flexible interaction with external components.  
+                - Reason: To provide external systems control over shield activation logic (e.g., event-based triggers).  
+        
+        7.4.4 Enhanced Projectile Firing Logic  
+                - Change: The firing logic (bossFiresInCurrentFrame) remains unchanged but is complemented by improved documentation for clarity.  
+                - Reason: Ensure readability and maintainability of the critical gameplay logic.  
+        
+        7.4.5 Movement Improvements  
+                - Change: Refactored initializeMovePattern to ensure the boss's movements are sufficiently randomized within a predefined pattern.  
+                - Reason: Increase unpredictability of boss movements, making gameplay more challenging.  
+        
+        7.4.6 Modularized Shield Frames Counter  
+                - Change: Added a getter getFramesWithShieldActivated.  
+                - Reason: To expose shield duration to external systems for monitoring or debugging.  
+
+    7.5. EnemyPlane Class  
+        7.5.1. Collision Bounds Adjustment  
+                - Change: Added `setShrinkFactorHeight(0.25)` and `setShrinkFactorWidth(0.6)` in the constructor.  
+                - Reason: Reduced the collision bounds of the plane for improved gameplay accuracy, ensuring that hit detection aligns better with the visual model. 
+        
+   
+    7.6. FighterPlane  
+        7.6.1. Package Organization  
+               - Change: Moved the class to `com.example.demo.ActiveActor` package for consistency with the project structure.  
+               - Reason: To align the class with the appropriate package for better project organization and consistency.   
+
+    7.7. UserPlane  
+        7.7.1 Enhanced Velocity Management  
+               - Change: Replaced the integer `velocityMultiplier` with a `double` for more precise velocity control, including `currentVelocity` and `targetVelocity`.  
+               - Reason: To allow smoother and more gradual movement of the plane with acceleration and deceleration, improving the responsiveness of user controls.  
+        
+        7.7.2 Introduced Acceleration and Deceleration  
+               - Change: Added new constants `ACCELERATION` and `DECELERATION`, and logic for adjusting the velocity gradually.  
+               - Reason: To provide more fluid movement, making the game feel more dynamic and responsive rather than just snapping between states.  
+        
+        7.7.3 Scatter Shot Mechanic Added  
+               - Change: Introduced a new method `fireScatterShot()` that fires multiple projectiles in different directions.  
+               - Reason: To offer the player more attack options, enhancing gameplay variety. The feature is limited by the number of available scatter shots.  
+        
+        7.7.4 Improved Movement Control  
+               - Change: The movement logic was modified to use `targetVelocity` and `currentVelocity` to control vertical movement instead of direct setting of `velocityMultiplier`.  
+               - Reason: This allows for smoother transitions in movement, avoiding abrupt stops and starts, making the controls feel more natural.  
+        
+        7.7.5 Health Management Enhancements  
+               - Change: Introduced `setShrinkFactorWidth(0.6)` and `setShrinkFactorHeight(0.25)` to modify the size of the plane, likely reflecting a damage state or aesthetic choice.  
+               - Reason: To visually indicate the player's plane condition and provide a more immersive experience.  
+        
+        7.7.6 Scatter Shot Use Limitation  
+               - Change: Added a `scatterShotUses` counter to limit the number of times scatter shots can be used.  
+               - Reason: To add a layer of strategy to the gameplay, forcing the player to use scatter shots wisely.  
+        
+        7.7.7 Simplified Projectile Firing  
+               - Change: The `fireProjectile()` method was retained, but it now includes clearer logic for firing projectiles directly ahead of the plane.  
+               - Reason: To maintain consistency in firing logic while enabling new attack mechanics like scatter shots.  
+        
+        7.7.8 Kill Tracking  
+               - Change: Introduced `incrementKillCount()` and `getNumberOfKills()` to track and display the player's kill count.  
+               - Reason: To enhance the game's competitive aspect and give the player more engagement with progress and achievements.
+
+    
 
 
 
