@@ -242,9 +242,9 @@
                - Change: The movement logic was modified to use `targetVelocity` and `currentVelocity` to control vertical movement instead of direct setting of `velocityMultiplier`.  
                - Reason: This allows for smoother transitions in movement, avoiding abrupt stops and starts, making the controls feel more natural.  
         
-        7.7.5. Health Management Enhancements  
-               - Change: Introduced `setShrinkFactorWidth(0.6)` and `setShrinkFactorHeight(0.25)` to modify the size of the plane, likely reflecting a damage state or aesthetic choice.  
-               - Reason: To visually indicate the player's plane condition and provide a more immersive experience.  
+        7.7.5. Collision Bounds Adjustment  
+                - Change: Added `setShrinkFactorHeight(0.25)` and `setShrinkFactorWidth(0.6)`.  
+                - Reason: Reduced the collision bounds of the plane for improved gameplay accuracy, ensuring that hit detection aligns better with the visual model.   
         
         7.7.6. Scatter Shot Use Limitation  
                - Change: Added a `scatterShotUses` counter to limit the number of times scatter shots can be used.  
@@ -377,7 +377,91 @@
                - Change: Added detailed comments and method-level documentation throughout the class.  
                - Reason: Enhanced clarity and understanding of the code's functionality for future developers.  
 
+    7.16. LevelParent
+        7.16.1. Added pause functionality
+                - To provide users with the ability to pause and resume the game, improving user control and enhancing the gameplay experience.
+                - New Variables: 
+                  - `isPaused(boolean)`: Tracks whether the game is paused or not.
+                  - `pauseLabel(Label)`: Displays the "Game Paused" text when the game is paused.
+                - New Methods:
+                  - `togglePauseGame()`: Pauses the game if it is running and displays the pause label; resumes the game and hides the pause label if it is paused.
+                  - `initializePauseLabel()`: Initializes the pause label with font, color, layout, and glow effect.
+                
+        7.16.2. Background music management
+                - To implement background music that continues looping until the game ends or is paused.
+                - New Method: 
+                  - `BGplaySound(String soundFile)`: Plays looping background music from a specified file, and starts the music when the game starts or when unpaused.
+                  - `playSound(String soundFile)`: Plays one-time sound effects when actions like firing a projectile occur.
+                
+          7.16.3. Modified scatter shot functionality
+                - To allow the user to fire scatter shots, which is a special ability to fire multiple projectiles at once.
+                - New Method:
+                  - `fireScatterShot()`: Fires multiple scatter shot projectiles from the user plane and updates the projectiles list. Stops the firing sound if scatter shot uses are depleted.
+                
+        7.16.4. Added better control for projectiles
+                - To ensure projectiles are added, updated, and removed properly from the game.
+                - Modified the `fireProjectile()` method to ensure the projectile is only fired if the game is active and not paused.
+                
+        7.16.5. Collision detection improvements
+                - To prevent unnecessary collisions and ensure that only active units are considered during collision checks.
+                - Modified `handleCollisions()` method to check for collision only between active actors and handle their interactions.
+                
+         7.16.6. Fixed game-over and win handling
+                - To allow the game to transition properly when the user wins or loses.
+                - New Methods:
+                  - `winGame()`: Stops the game, displays a win image, and halts the game loop.
+                  - `loseGame()`: Stops the game, shows the game over image, and stops the background music while playing the lose sound effect.
+                
+        7.16.7. Added functionality for enemy fire
+                - To make the enemies fire projectiles at the player and add them to the game.
+                - New Method: 
+                  - `generateEnemyFire()`: Spawns projectiles fired by enemy units and adds them to the game.
+                  - `spawnEnemyProjectile(ActiveActorDestructible projectile)`: Adds enemy projectiles to the game and the projectiles list.  
     
+     7.17. BossProjectile 
+         7.17.1. Refactoring Package Structure  
+                 - Change: Moved the class to `com.example.demo.Projectiles` package for consistency with the project structure.  
+                 - Reason: To align the class with the appropriate package for better project organization and consistency. 
+          7.17.2. Collision Bounds Adjustment  
+                 - Change: Added `setShrinkFactorHeight(0.4)` and `setShrinkFactorWidth(0.7)`.  
+                 - Reason: Reduced the collision bounds of the plane for improved gameplay accuracy, ensuring that hit detection aligns better with the visual model.   
+
+    7.18. EnemyProjectile 
+         7.18.1. Refactoring Package Structure  
+                 - Change: Moved the class to `com.example.demo.Projectiles` package for consistency with the project structure.  
+                 - Reason: To align the class with the appropriate package for better project organization and consistency. 
+        7.18.2. Collision Bounds Adjustment  
+                - Change: Added `setShrinkFactorHeight(0.15)` and `setShrinkFactorWidth(0.35)`.  
+                - Reason: Reduced the collision bounds of the plane for improved gameplay accuracy, ensuring that hit detection aligns better with the visual model.    
+   
+    7.18. Projectile 
+         7.18.1. Refactoring Package Structure  
+                 - Change: Moved the class to `com.example.demo.Projectiles` package for consistency with the project structure.  
+                 - Reason: To align the class with the appropriate package for better project organization and consistency. 
+        7.18.2. Collision Bounds Adjustment  
+                - Change: Added `setShrinkFactorHeight(0.15)` and `setShrinkFactorWidth(0.15)`.  
+                - Reason: Reduced the collision bounds of the plane for improved gameplay accuracy, ensuring that hit detection aligns better with the visual model.   
+
+    7.14. UserProjectile  
+        7.14.1. Refactored Package Structure  
+               - Change: Moved the class from `com.example.demo` to `com.example.demo.Projectiles`.  
+               - Reason: Improved the organization of projectile-related components for better project structure and maintainability.  
+            
+         7.14.2. Added Angle Property for Scattershot  
+               - Change: Introduced a new `angle` property in the class to store the firing angle of the projectile.  
+               - Reason: To enable more versatile projectile movement, allowing for angled shots rather than just horizontal movement.  
+            
+         7.14.3. Updated Constructor with Angle Parameter  
+               - Change: Modified the constructor to accept an additional `angle` parameter for setting the firing angle of the projectile.  
+               - Reason: Provides flexibility to fire the projectile at different angles, enhancing gameplay mechanics.  
+            
+        7.14.4. Modified Position Update Logic  
+               - Change: Updated the `updatePosition()` method to calculate horizontal and vertical movement using trigonometric functions (cosine for horizontal, sine for vertical) based on the firing angle.  
+               - Reason: To allow the projectile to move in both horizontal and vertical directions based on the specified angle, enabling dynamic projectile trajectories.  
+            
+        7.14.5. Renamed Constant  
+               - Change: Changed the constant `HORIZONTAL_VELOCITY` to `SPEED` for clarity.  
+               - Reason: To generalize the term and better reflect that the projectile now moves in both horizontal and vertical directions based on its angle, not just horizontally.  
 
 
 
