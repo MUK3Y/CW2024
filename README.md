@@ -4,7 +4,7 @@
 
     2.1. Ensure the computer running the program has its volume set loud enough for the user to hear the game's audio clearly.
 
-    2.2. Download the zip file from GitHub and extract the BrahmaMukthyKrishnan_Intellij_23.zip file.
+    2.2. Download the zip file from GitHub and extract the BrahmaMukthyKrishnan_Intellij_21.zip file.
 
     2.3. Launch IntelliJ and load only the CW2024-master folder into the IDE.
 
